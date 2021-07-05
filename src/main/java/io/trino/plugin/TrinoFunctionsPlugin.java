@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,30 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.trino.plugin.kdc;
+package io.trino.plugin;
 
 import com.google.common.collect.ImmutableSet;
-import io.trino.plugin.kdc.aggregation.ArraySumAggregation;
-import io.trino.plugin.kdc.aggregation.FunnelAggregation;
-import io.trino.plugin.kdc.scalar.HiveNvl;
+import io.trino.plugin.scalar.DateFunction;
 import io.trino.spi.Plugin;
 
 import java.util.Set;
 
-/**
- * @author jake.zhang zhangxj@kingnet.com
- * @date 2019-11-28 14:18
- */
-public class KdcFunctionsPlugin
+
+public class TrinoFunctionsPlugin
         implements Plugin
 {
     @Override
     public Set<Class<?>> getFunctions()
     {
         return ImmutableSet.<Class<?>>builder()
-                       .add(HiveNvl.class)
-                       .add(FunnelAggregation.class)
-                       .add(ArraySumAggregation.class)
+                       .add(DateFunction.class)
                        .build();
     }
 }

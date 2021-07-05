@@ -4,19 +4,62 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>io.trino</groupId>
-        <artifactId>trino-root</artifactId>
-        <version>351</version>
-        <relativePath>../../pom.xml</relativePath>
-    </parent>
-
-    <artifactId>trino-kdc-functions</artifactId>
-    <description>kdc's specific functions for Trino</description>
-    <packaging>trino-plugin</packaging>
+    <groupId>io.trino</groupId>
+    <artifactId>plugin-udf</artifactId>
+    <version>358</version>
+<!--    <packaging>jar</packaging>-->
+<!--    <parent>-->
+<!--        <groupId>io.trino</groupId>-->
+<!--        <artifactId>trino-root</artifactId>-->
+<!--        <version>358</version>-->
+<!--        <relativePath>../../pom.xml</relativePath>-->
+<!--    </parent>-->
 
     <properties>
-        <air.main.basedir>${project.parent.basedir}</air.main.basedir>
+<!--        <air.main.basedir>${project.parent.basedir}</air.main.basedir>-->
+        <skipTests>true</skipTests>
+        <trino.verion>358</trino.verion>
+        <dep.accumulo.version>1.7.4</dep.accumulo.version>
+        <dep.accumulo-hadoop.version>2.7.7-1</dep.accumulo-hadoop.version>
+        <dep.antlr.version>4.9</dep.antlr.version>
+        <dep.airlift.version>206</dep.airlift.version>
+        <dep.packaging.version>${dep.airlift.version}</dep.packaging.version>
+        <dep.aws-sdk.version>1.11.946</dep.aws-sdk.version>
+        <dep.okhttp.version>3.14.9</dep.okhttp.version>
+        <dep.jdbi3.version>3.17.0</dep.jdbi3.version>
+        <dep.oracle.version>19.3.0.0</dep.oracle.version>
+        <dep.drift.version>1.14</dep.drift.version>
+        <dep.scribejava.version>6.9.0</dep.scribejava.version>
+        <dep.selenium.version>3.141.59</dep.selenium.version>
+        <dep.tempto.version>183</dep.tempto.version>
+        <dep.gcs.version>2.0.0</dep.gcs.version>
+        <dep.errorprone.version>2.5.1</dep.errorprone.version>
+        <dep.testcontainers.version>1.15.3</dep.testcontainers.version>
+        <dep.docker-java.version>3.2.8</dep.docker-java.version>
+        <dep.coral.version>1.0.58</dep.coral.version>
+        <dep.confluent.version>5.5.2</dep.confluent.version>
+        <dep.guice.version>5.0.1</dep.guice.version>
+        <dep.guava.version>30.1.1-jre</dep.guava.version>
+        <dep.slf4j.version>1.7.30</dep.slf4j.version>
+        <dep.logback.version>1.2.3</dep.logback.version>
+        <dep.javax-inject.version>1</dep.javax-inject.version>
+        <dep.javax-validation.version>2.0.1.Final</dep.javax-validation.version>
+        <dep.javax-servlet.version>4.0.1</dep.javax-servlet.version>
+        <dep.bval.version>2.0.5</dep.bval.version>
+        <dep.jackson.version>2.12.2</dep.jackson.version>
+        <dep.jmxutils.version>1.21</dep.jmxutils.version>
+        <dep.cglib.version>3.3.0</dep.cglib.version>
+        <dep.joda.version>2.10.9</dep.joda.version>
+        <dep.spotbugs-annotations.version>4.2.2</dep.spotbugs-annotations.version>
+        <dep.testng.version>6.10</dep.testng.version>
+        <dep.assertj-core.version>3.18.1</dep.assertj-core.version>
+        <dep.slice.version>0.39</dep.slice.version>
+        <dep.jmh.version>1.20</dep.jmh.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.version>3.8.0</maven.compiler.version>
+        <jackson.version>2.9.10.1</jackson.version>
+        <junit.version>5.4.2</junit.version>
     </properties>
 
     <dependencies>
@@ -24,68 +67,85 @@
         <dependency>
             <groupId>io.trino</groupId>
             <artifactId>trino-array</artifactId>
+            <version>${trino.verion}</version>
         </dependency>
 
         <dependency>
             <groupId>io.airlift</groupId>
             <artifactId>json</artifactId>
+            <version>${dep.airlift.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.airlift</groupId>
             <artifactId>log</artifactId>
+            <version>${dep.airlift.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
+            <version>${dep.jackson.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>${dep.jackson.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
+            <version>${dep.guava.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${dep.joda.version}</version>
+<!--            <version>2.10.9</version>-->
+        </dependency>
         <!-- Presto SPI -->
         <dependency>
             <groupId>io.trino</groupId>
             <artifactId>trino-spi</artifactId>
+            <version>${trino.verion}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>io.airlift</groupId>
             <artifactId>slice</artifactId>
+            <version>${dep.slice.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
+            <version>${dep.jackson.version}</version>
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.openjdk.jol</groupId>
-            <artifactId>jol-core</artifactId>
-            <scope>provided</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.openjdk.jol</groupId>-->
+<!--            <artifactId>jol-core</artifactId>-->
+<!--            <version></version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
 
         <!-- for testing -->
         <dependency>
             <groupId>io.trino</groupId>
             <artifactId>trino-main</artifactId>
+            <version>${trino.verion}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>io.trino</groupId>
             <artifactId>trino-main</artifactId>
+            <version>${trino.verion}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
@@ -93,14 +153,58 @@
         <dependency>
             <groupId>io.trino</groupId>
             <artifactId>trino-testing</artifactId>
+            <version>${trino.verion}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
+            <version>${dep.testng.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
+                <configuration>
+                    <encoding>utf-8</encoding>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+<!--            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                    <argLine>-Xmx3072m -Xms1024m -XX:MetaspaceSize=512m</argLine>
+                </configuration>
+            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
